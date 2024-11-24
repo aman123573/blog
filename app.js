@@ -1,4 +1,4 @@
-require('dotenv').config({ path: './.env' });
+require('dotenv').config();
 // console.log(process.env)
 const path = require("path");
 const express = require("express");
@@ -17,15 +17,8 @@ const {
 const app = express();
 const PORT = process.env.PORT || 8000;
 // const uri = 'mongodb://127.0.0.1:27017/blogIt'
-// process.env.TEST_VAR = "hello world"
-// console.log(process.env.TEST_VAR)
-const uri = process.env.MONGO_URI;
-if (!uri) {
-  throw new Error('MONGO_URI is not defined in .env file');
-}
-// console.log(process.env.MONGO_URL)
 mongoose
-  .connect(uri)
+  .connect(process.env.MONGO_URI)
   .then((e) => console.log("MongoDB Connected"));
 
 app.set("view engine", "ejs");
